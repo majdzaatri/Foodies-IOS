@@ -11,12 +11,28 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController = sb.instantiateViewController(withIdentifier: "Onboarding")
+        
+        let userDefaults = UserDefaults.standard
+        
+        if userDefaults.bool(forKey: "onboardingComplete") {
+            initialViewController = sb.instantiateViewController(withIdentifier: "Mainapp")
+            print(userDefaults.bool(forKey: "onboardingComplete"))
+        }
+                        
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 
