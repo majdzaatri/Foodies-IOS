@@ -22,8 +22,8 @@ class OnboardingViewController: UIViewController {
         onboardingView.dataSource = self
         onboardingView.delegate = self
 
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(false, forKey: "onboardingComplete")
+//        let userDefaults = UserDefaults.standard
+//        userDefaults.set(false, forKey: "onboardingComplete")
         
         
         if oldUser() {
