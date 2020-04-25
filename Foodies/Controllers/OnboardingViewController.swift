@@ -30,7 +30,7 @@ class OnboardingViewController: UIViewController {
             
             let sb = UIStoryboard(name: "Main", bundle: nil)
             
-            initialViewController = sb.instantiateViewController(withIdentifier: "Mainapp")
+            initialViewController = sb.instantiateViewController(withIdentifier: Constants.ViewControllerID.signupScreen)
             
             //NOTE:check if there another way to change the initial View Controller
             self.addChild(initialViewController)
@@ -53,7 +53,7 @@ class OnboardingViewController: UIViewController {
     @IBAction func gotStarted(_ sender: UIButton) {
         let userDefaults = UserDefaults.standard
         
-        userDefaults.set(true, forKey: "onboardingComplete")
+        userDefaults.set(true, forKey: Constants.UserDefaults.onBoarding)
         userDefaults.synchronize()
     }
     
@@ -61,7 +61,7 @@ class OnboardingViewController: UIViewController {
      private func oldUser() -> Bool {
         let userDefaults = UserDefaults.standard
         
-        let isOldUser = userDefaults.bool(forKey: "onboardingComplete")
+        let isOldUser = userDefaults.bool(forKey: Constants.UserDefaults.onBoarding)
         
         return isOldUser
     }
@@ -87,7 +87,7 @@ extension OnboardingViewController: PaperOnboardingDelegate,PaperOnboardingDataS
     
     func onboardingDidTransitonToIndex(_ index: Int) {
         if index == 2{
-                     self.getStarted.alpha = 1
+                self.getStarted.alpha = 1
              }
     }
     
@@ -99,7 +99,7 @@ extension OnboardingViewController: PaperOnboardingDelegate,PaperOnboardingDataS
         
         return [
             OnboardingItemInfo(
-               informationImage: UIImage(named:"fridge")!,
+                informationImage: UIImage(named: Constants.AppImages.onBoardingFridge)!,
                title: "WHAT'S IN MY FRIDGE?",
                description: "Find recipes that use as many of the ingredients you have available as possible while limiting missing ingredients.",
                pageIcon:  UIImage(),
@@ -110,7 +110,7 @@ extension OnboardingViewController: PaperOnboardingDelegate,PaperOnboardingDataS
                descriptionFont: UIFont(name: "PingFangSC-Regular", size: CGFloat(15))!),
             
             OnboardingItemInfo(
-               informationImage: UIImage(named:"family")!,
+                informationImage: UIImage(named:Constants.AppImages.onBoardingFamily)!,
                title: "Family members",
                description: "Shopping list will be available and synchronised with any family member.",
                pageIcon:  UIImage(),
@@ -121,7 +121,7 @@ extension OnboardingViewController: PaperOnboardingDelegate,PaperOnboardingDataS
                descriptionFont: UIFont(name: "PingFangSC-Regular", size: CGFloat(15))!),
             
             OnboardingItemInfo(
-                informationImage: UIImage(named:"family")!,
+                informationImage: UIImage(named:Constants.AppImages.onBoardingFamily)!,
                 title: "MEAL PLANNING",
                 description: "Plan your week with our meal planning.",
                 pageIcon:  UIImage(),
