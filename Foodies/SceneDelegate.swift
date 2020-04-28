@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -47,7 +48,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+          
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let context = URLContexts.first else {
+            return
+        }
 
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            open: context.url,
+            sourceApplication: context.options.sourceApplication,
+            annotation: context.options.annotation
+        )
+    }
+        
 
 }
 

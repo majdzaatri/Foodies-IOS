@@ -30,7 +30,7 @@ class OnboardingViewController: UIViewController {
             
             let sb = UIStoryboard(name: "Main", bundle: nil)
             
-            initialViewController = sb.instantiateViewController(withIdentifier: Constants.ViewControllerID.signupScreen)
+            initialViewController = sb.instantiateViewController(withIdentifier: Constants.ViewControllerID.signinScreen)
             
             //NOTE:check if there another way to change the initial View Controller
             self.addChild(initialViewController)

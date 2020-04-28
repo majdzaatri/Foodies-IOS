@@ -29,4 +29,9 @@ struct Constants {
         static let onBoardingFridge = "fridge"
         static let onBoardingFamily = "family"
     }
+    
+    struct Segue {
+        static let signInCompleted = "SignInSuc"
+        static let signUpCompleted = "SignUpSuc"
+    }
 }

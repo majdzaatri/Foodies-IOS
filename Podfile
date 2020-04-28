@@ -11,6 +11,10 @@ target 'Foodies' do
   pod 'MaterialComponents/TextControls+OutlinedTextFields'
   pod 'MaterialComponents/Buttons'
   pod 'MaterialComponents/Buttons+Theming'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'FBSDKLoginKit'
   # Pods for Foodies
 
 end
