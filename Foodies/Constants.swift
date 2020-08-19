@@ -33,5 +33,8 @@ struct Constants {
     struct Segue {
         static let signInCompleted = "SignInSuc"
         static let signUpCompleted = "SignUpSuc"
+        static let changeToSignUp = "SignUp"
+        static let changeToSignIn = "SignIn"
+        static let logoutCompleted = "LogoutSuc"
     }
 }

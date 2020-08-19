@@ -14,6 +14,7 @@
 		B166EF7824537A2700AEC054 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166EF7724537A2700AEC054 /* SignInViewController.swift */; };
 		B16786BC24542890001D035A /* MaterialComponentsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16786BB24542890001D035A /* MaterialComponentsStruct.swift */; };
 		B16786BE24555A61001D035A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B16786BD24555A60001D035A /* GoogleService-Info.plist */; };
+		B17C40A824964EEE0077E421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C40A724964EEE0077E421 /* MainViewController.swift */; };
 		B18F09CF244C019B00C22AC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18F09CE244C019B00C22AC6 /* AppDelegate.swift */; };
 		B18F09D1244C019B00C22AC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18F09D0244C019B00C22AC6 /* SceneDelegate.swift */; };
 		B18F09D3244C019B00C22AC6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18F09D2244C019B00C22AC6 /* OnboardingViewController.swift */; };
@@ -32,6 +33,7 @@
 		B166EF7724537A2700AEC054 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B16786BB24542890001D035A /* MaterialComponentsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialComponentsStruct.swift; sourceTree = "<group>"; };
 		B16786BD24555A60001D035A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B17C40A724964EEE0077E421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B18F09CB244C019B00C22AC6 /* Foodies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18F09CE244C019B00C22AC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B18F09D0244C019B00C22AC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				B18F09D2244C019B00C22AC6 /* OnboardingViewController.swift */,
 				B192E537244E406C0032A306 /* SignUpViewController.swift */,
 				B166EF7724537A2700AEC054 /* SignInViewController.swift */,
+				B17C40A724964EEE0077E421 /* MainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				B1048746244D922B00112315 /* OnboardingView.swift in Sources */,
 				B192E538244E406C0032A306 /* SignUpViewController.swift in Sources */,
 				B18F09CF244C019B00C22AC6 /* AppDelegate.swift in Sources */,
+				B17C40A824964EEE0077E421 /* MainViewController.swift in Sources */,
 				B18F09D1244C019B00C22AC6 /* SceneDelegate.swift in Sources */,
 				B166EF76245372B400AEC054 /* Constants.swift in Sources */,
 			);

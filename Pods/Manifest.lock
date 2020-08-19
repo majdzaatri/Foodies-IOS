@@ -216,6 +216,7 @@ PODS:
   - paper-onboarding (6.1.4)
 
 DEPENDENCIES:
+  - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Auth
@@ -277,6 +278,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   paper-onboarding: d3f16416e6f42add686117e8b32bfffaad899a79
 
-PODFILE CHECKSUM: fb03101a16aefbe1185e1b90834a7aeb4bf8eb3e
+PODFILE CHECKSUM: c21f9f15265839a75e3f9a8d2bf30e877ec6bddd
 
 COCOAPODS: 1.8.4

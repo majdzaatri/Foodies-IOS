@@ -16,6 +16,7 @@ class SignUpViewController: UIViewController  {
     @IBOutlet weak var titleLabel: UILabel!
     var ref: DatabaseReference!
     
+    //Material components
     let emailTF: MDCOutlinedTextField = {
         let emailTFComponents = MaterialComponentsStruct.TextField.init("Email", "example@company.com", 0.85, false)
         return emailTFComponents.initTextField()
@@ -39,6 +40,29 @@ class SignUpViewController: UIViewController  {
         return signUpButtonContent.initButton()
     }()
     
+    let signInLabel: UILabel = {
+        let label = UILabel()
+        let attributedText: [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.foregroundColor: Constants.AppColors.mainColor,
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)
+        ]
+        label.adjustsFontSizeToFitWidth = true
+        let myAttrString = NSAttributedString(string: "Already have an account?", attributes: attributedText)
+        label.attributedText = myAttrString
+        return label
+    }()
+    
+    let signInButton: UIButton = {
+        let signInButton = UIButton()
+        signInButton.setTitle("sign in", for: .normal)
+        signInButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        signInButton.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        return signInButton
+    }()
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +79,7 @@ class SignUpViewController: UIViewController  {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     fileprivate func titleAnimation() {
@@ -85,18 +109,27 @@ class SignUpViewController: UIViewController  {
             }
         }
     }
+    
+    @objc func signInPressed(sender: Any) {
+        self.performSegue(withIdentifier: Constants.Segue.changeToSignIn, sender: self)
+    }
 }
+
+
 
 
 
 //MARK:  SignUp View Controller layouts and components
 extension SignUpViewController {
     fileprivate func setupLayoutsAndComponents() {
+        
            
            self.view.addSubview(emailTF)
            self.view.addSubview(usernameTF)
            self.view.addSubview(passwordTF)
            self.view.addSubview(signUpButton)
+           self.view.addSubview(signInLabel)
+           self.view.addSubview(signInButton)
            
            //Enable autoLayout
            emailTF.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +139,8 @@ extension SignUpViewController {
            passwordTF.translatesAutoresizingMaskIntoConstraints = false
            passwordTF.autocorrectionType = .no
            signUpButton.translatesAutoresizingMaskIntoConstraints = false
+           signInLabel.translatesAutoresizingMaskIntoConstraints = false
+           signInButton.translatesAutoresizingMaskIntoConstraints = false
            
            NSLayoutConstraint.activate([
                emailTF.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -139,6 +174,15 @@ extension SignUpViewController {
            signUpButton.layer.shadowRadius = 5
            signUpButton.layer.shadowOpacity = 1.0
            signUpButton.addTarget(self, action: #selector(signupPressed(sender:)), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            signInLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 25),
+            signInLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 27),
+            signInButton.leftAnchor.constraint(equalTo: signInLabel.rightAnchor, constant: 5),
+            signInButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20)
+        ])
+        signInButton.addTarget(self, action: #selector(signInPressed(sender:)), for: .touchUpInside)
+        
        }
 
 }

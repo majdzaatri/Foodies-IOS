@@ -15,6 +15,9 @@ target 'Foodies' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit'
+  platform :ios, '9.0'
+  use_frameworks!
   # Pods for Foodies
 
 end

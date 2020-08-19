@@ -11,6 +11,7 @@ import MaterialComponents
 import MaterialComponents.MaterialButtons_Theming
 import Firebase
 import FBSDKLoginKit
+import FBSDKCoreKit
 
 class SignInViewController: UIViewController {
     
@@ -34,6 +35,30 @@ class SignInViewController: UIViewController {
         return signInButtonContent.initButton()
     }()
     
+    let signUpLabel: UILabel = {
+        let label = UILabel()
+        let attributedText: [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.foregroundColor: Constants.AppColors.mainColor,
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)
+        ]
+        label.adjustsFontSizeToFitWidth = true
+        let myAttrString = NSAttributedString(string: "Don't have an account yet?", attributes: attributedText)
+        label.attributedText = myAttrString
+        return label
+    }()
+    
+    let signUpButton: UIButton = {
+        let signUpButton = UIButton()
+        signUpButton.setTitle("sign up", for: .normal)
+        signUpButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        signUpButton.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        return signUpButton
+    }()
+    
+    
+    
+    
+    
     let loginButton = FBLoginButton()
 
     override func viewDidLoad() {
@@ -41,12 +66,37 @@ class SignInViewController: UIViewController {
         titleAnimation()
         setupLayoutsAndComponents()
 
-        loginButton.center = view.center
-        loginButton.delegate = self
+
+        if let token = AccessToken.current,
+            !token.isExpired {
+            // User is logged in, do work such as go to next view controller.
+            
+            let token = token.tokenString
+            
+            let request = FBSDKLoginKit.GraphRequest(graphPath: "me",
+                                                     parameters: ["fields": "email, name"],
+                                                     tokenString: token,
+                                                     version: nil,
+                                                     httpMethod: .get)
+            
+            request.start(completionHandler: { connection, result, error in
+                print("☢️\(String(describing: result))")
+                if (result != nil) {
+                    self.performSegue(withIdentifier: Constants.Segue.signInCompleted, sender: self)
+                }
+            })
+            
+        } else {
+            loginButton.center = view.center
+            loginButton.delegate = self
+            loginButton.permissions = ["public_profile", "email"]
+        }
+        
         
     }
     
     
+    //Hide navigationBar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -54,7 +104,7 @@ class SignInViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
@@ -85,6 +135,10 @@ class SignInViewController: UIViewController {
             }
         }
     }
+    
+    @objc func signUpPressed(sender: Any) {
+        self.performSegue(withIdentifier: Constants.Segue.changeToSignUp, sender: self)
+    }
 }
 
 
@@ -97,6 +151,8 @@ extension SignInViewController {
            self.view.addSubview(passwordTF)
            self.view.addSubview(signInButton)
            self.view.addSubview(loginButton)
+           self.view.addSubview(signUpLabel)
+           self.view.addSubview(signUpButton)
            
            emailTF.translatesAutoresizingMaskIntoConstraints = false
            emailTF.autocorrectionType = .no
@@ -125,9 +181,30 @@ extension SignInViewController {
            signInButton.translatesAutoresizingMaskIntoConstraints = false
            NSLayoutConstraint.activate([
                signInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-               signInButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20)
+               signInButton.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 30)
            ])
            signInButton.addTarget(self, action: #selector(signinPressed(sender:)), for: .touchUpInside)
+        
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            loginButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 100)
+        ])
+        
+        signUpLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            signUpLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
+            signUpLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 27)
+        ])
+        
+//        signUpButton.applyTextTheme(withScheme: MDCContainerScheme.init())
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            signUpButton.leftAnchor.constraint(equalTo: signUpLabel.rightAnchor, constant: 5),
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20)
+        ])
+        signUpButton.addTarget(self, action: #selector(signUpPressed(sender:)), for: .touchUpInside)
+        
        }
 }
 
@@ -140,10 +217,21 @@ extension SignInViewController: LoginButtonDelegate {
     }
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        if let e = error {
-            print(e)
-        } else {
-            self.performSegue(withIdentifier: Constants.Segue.signInCompleted, sender: self)
-        }
+        
+        let token = result?.token?.tokenString
+        
+        let request = FBSDKLoginKit.GraphRequest(graphPath: "me",
+                                                 parameters: ["fields": "email, name"],
+                                                 tokenString: token,
+                                                 version: nil,
+                                                 httpMethod: .get)
+        
+        request.start(completionHandler: { connection, result, error in
+            print("☢️\(String(describing: result))")
+            if (result != nil) {
+                self.performSegue(withIdentifier: Constants.Segue.signInCompleted, sender: self)
+            }
+            
+        })
     }
 }
