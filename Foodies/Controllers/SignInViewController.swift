@@ -55,10 +55,6 @@ class SignInViewController: UIViewController {
         return signUpButton
     }()
     
-    
-    
-    
-    
     let loginButton = FBLoginButton()
 
     override func viewDidLoad() {
