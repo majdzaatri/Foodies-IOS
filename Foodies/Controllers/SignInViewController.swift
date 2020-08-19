@@ -66,7 +66,6 @@ class SignInViewController: UIViewController {
         titleAnimation()
         setupLayoutsAndComponents()
 
-
         if let token = AccessToken.current,
             !token.isExpired {
             // User is logged in, do work such as go to next view controller.

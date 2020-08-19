@@ -18,7 +18,6 @@ class MainViewController: UIViewController {
     
     
     @IBAction func logout(_ sender: Any) {
-        
         LoginManager().logOut()
         print("✅logged out")
     }
